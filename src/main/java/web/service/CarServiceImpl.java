@@ -1,19 +1,22 @@
 package web.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import web.model.Car;
-
+import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
-    private final List<Car> cars;
 
-    @Autowired
-    public CarServiceImpl(List<Car> cars) {
-        this.cars = cars;
-    }
+    private final List<Car> cars = Arrays.asList(
+            new Car("Nissan", "Nnn1", 2003),
+            new Car("FX", "123F", 2001),
+            new Car("Mx", "73M", 1999),
+            new Car("X-Trail", "777", 2000),
+            new Car("BMV", "999", 2007)
+    );
 
     @Override
     public List<Car> getAllCars(int count) {
