@@ -12,9 +12,9 @@ import java.util.List;
 
 @Controller
 public class CarController {
-
     @GetMapping(value = "/cars")
-    public String printWelcome(@RequestParam(value = "count", required = false) Integer count, ModelMap model) {
+    public String printWelcome(@RequestParam(value = "count", required = false, defaultValue = "0") Integer count, ModelMap model) {
+
         List<Car> cars = new ArrayList<>();
         cars.add(new Car("Nissan", "Mx", 1999));
         cars.add(new Car("FF", "999", 1999));
@@ -23,14 +23,11 @@ public class CarController {
         cars.add(new Car("X-Trail", "Rthx", 1999));
         cars.add(new Car("BMW", "L", 1999));
 
-        if(count == null || count > cars.size()){
-            count = cars.size();
-        }
+        CarService carService = new CarServiceImpl(cars);
 
         List<String> carMessage = new ArrayList<>();
-        CarService carService = new CarServiceImpl();
 
-        List<Car> resultCars = carService.getAllCars(cars, count);
+        List<Car> resultCars = carService.getAllCars(count);
         carMessage.add("Cars: ");
 
         int idx = 0;
@@ -43,5 +40,4 @@ public class CarController {
         model.addAttribute("messages", carMessage);
         return "index";
     }
-
 }
