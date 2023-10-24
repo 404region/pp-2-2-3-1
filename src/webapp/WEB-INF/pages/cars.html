@@ -7,8 +7,13 @@
 </head>
 <body>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
+    <h1>Cars: </h1>
+    <th:block th:each="car : ${carsList}">
+        <p>
+            <span th:text="${car.model}"></span>
+            <span th:text="${car.series}"></span>
+            <span th:text="${car.year}"></span>
+        </p>
     </th:block>
 </div>
 </body>
