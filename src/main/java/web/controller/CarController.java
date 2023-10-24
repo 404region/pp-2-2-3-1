@@ -18,18 +18,8 @@ public class CarController {
 
     @GetMapping(value = "/cars")
     public String printWelcome(@RequestParam(value = "count", required = false, defaultValue = "0") Integer count, ModelMap model) {
-        //List<String> cars = new ArrayList<>();
 
         List<Car> carsList = carServiceImpl.getAllCars(count);
-        /*cars.add("Cars: ");
-
-        int idx = 0;
-        for (Car car : carsList) {
-            cars.add("Car " + ++idx + " " +
-                    car.getModel() + " " +
-                    car.getSeries() + " " +
-                    car.getYear());
-        }*/
         model.addAttribute("carsList", carsList);
         return "cars";
     }
