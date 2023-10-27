@@ -1,19 +1,38 @@
 package web.model;
 
-import lombok.RequiredArgsConstructor;
+import javax.persistence.*;
 
-@RequiredArgsConstructor
+@Entity
+@Table(name = "Users")
 public class User {
-    private String id;
-    private String name;
-    private String surname;
-    private int age;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public String getId() {
+    @Column
+    private String name;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private Byte age;
+
+    public User() {
+
+    }
+
+    public User(String name, String lastName, Byte age) {
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -25,19 +44,29 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public int getAge() {
+    public Byte getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Byte age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
