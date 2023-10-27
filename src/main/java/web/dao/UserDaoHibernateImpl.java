@@ -1,9 +1,11 @@
 package web.dao;
 
 
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 import web.model.User;
 import web.util.Util;
 
@@ -11,9 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    public UserDaoHibernateImpl() {
-
-    }
 
     @Override
     public void createUsersTable() {

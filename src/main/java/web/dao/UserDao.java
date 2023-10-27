@@ -1,4 +1,6 @@
 package web.dao;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import web.model.User;
 
 import java.util.List;
