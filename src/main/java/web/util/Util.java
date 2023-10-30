@@ -6,6 +6,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import web.model.User;
 
+import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ public class Util {
     private static final String dbURL = "jdbc:mysql://localhost:3306/root";
     private static final String username = "root";
     private static final String password = "root";
+
 
     private static SessionFactory sessionFactory;
 

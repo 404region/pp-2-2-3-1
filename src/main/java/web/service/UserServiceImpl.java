@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import web.dao.UserDaoHibernateImpl;
 import web.model.User;
+import web.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserDaoHibernateImpl userDao = new UserDaoHibernateImpl();
+    private  final UserRepository userRepository = new UserRepository();
 
     private final List<User> users = userDao.getAllUsers();
     /*private final List<User> users = Arrays.asList(
@@ -30,8 +32,11 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void saveUser(User user) {
+    /*public void saveUser(User user) {
         userDao.saveUser(user);
+    }*/
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
 
