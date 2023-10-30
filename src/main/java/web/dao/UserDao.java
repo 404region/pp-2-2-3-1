@@ -12,6 +12,8 @@ public interface UserDao {
 
     void saveUser(String name, String lastName, byte age);
 
+    void saveUser(User user);
+
     User getUserById(long id);
 
     void removeUserById(long id);

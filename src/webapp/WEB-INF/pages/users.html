@@ -6,9 +6,10 @@
     <title></title>
 </head>
 <body>
-<div>
+<!--
+-<div>
     <h1>Users: </h1>
-    <th:block th:each="user : ${usersList}">
+    <th:block th:each="user : ${users}">
         <p font->
             <span th:text="${user.getName()}"></span>
             <span th:text="${user.lastName}"></span>
@@ -17,6 +18,36 @@
     </th:block>
 
     <a href="/createDatabase">Create database Users</a>
-</div>
+</div>//-->
+
+    <div th:switch="${users}">
+        <h2 th:case="null">No users found!</h2>
+        <div th:case="*">
+            <h2>Users</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Last name</th>
+                    <th>Age</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td><a th:href="@{user-update?id={id}(id=${user.id})}">Edit</a></td>
+                    <td><a th:href="@{user-delete?id={id}(id=${user.id})}">Delete</a></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <p><a href="/user-create">Create user</a></p>
+    </div>
 </body>
 </html>

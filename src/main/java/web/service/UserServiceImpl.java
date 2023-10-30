@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import web.dao.UserDaoHibernateImpl;
 import web.model.User;
+
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,10 +22,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers(int count) {
-        userDao.createUsersTable();
         if (count < 1 || count > users.size()) {
             count = users.size();
         }
         return users.subList(0, count);
+    }
+
+
+    @Override
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 }
