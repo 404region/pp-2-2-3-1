@@ -53,14 +53,14 @@ public class UserController {
     @GetMapping("user-delete")
     public String deleteUser(@RequestParam(value="id", required = false, defaultValue = "0") Long idVar) {
         System.out.println("id" + idVar);
-        //userService.deleteById(idVar);
-        return "redirect:/users";
+        userService.deleteById(idVar);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/user-update", method = RequestMethod.GET)
     public String updateUserForm(@RequestParam(value="id", required = false, defaultValue = "0") Long id, Model model) {
-        //User user = userService.findById(id);
-       // model.addAttribute("user", user);
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
         return "/user-update";
     }
 

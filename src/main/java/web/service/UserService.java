@@ -6,4 +6,8 @@ public interface UserService {
     List<User> getAllUsers(int count);
 
     void saveUser(User user);
+
+    void deleteById(Long id);
+
+    User findById(Long id);
 }
