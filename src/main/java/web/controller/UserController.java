@@ -21,7 +21,6 @@ public class UserController {
         return "/users";
     }
 
-
     @GetMapping("/user-create")
     public String createUserForm(User user) {
         return "user-create";
@@ -33,7 +32,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @DeleteMapping("user-delete")
+    @GetMapping("user-delete")
     public String deleteUser(@RequestParam(value = "id", required = false, defaultValue = "0") Long idVar) {
         System.out.println("id" + idVar);
         userService.deleteById(idVar);
@@ -49,6 +48,7 @@ public class UserController {
 
     @PostMapping("user-update")
     public String updateUser(User user) {
+        System.out.println(user.toString());
         userService.saveUser(user);
         return "redirect:/";
     }

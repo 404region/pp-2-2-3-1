@@ -1,28 +1,28 @@
 package web.dao;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private String queryFindUserById="SELECT c FROM User c WHERE c.id LIKE :id";
-
     @Override
     public void saveUser(User user) {
-        entityManager.persist(user);
-
-        entityManager.close();
+        if (user.getId() == null) {
+            entityManager.persist(user);
+        } else {
+            entityManager.merge(user);
+        }
     }
 
     @Override
@@ -31,17 +31,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @Transactional
     public void removeUserById(long id) {
-        User user = (User) entityManager.createQuery(queryFindUserById)
-                .setParameter("id", id)
-                .getSingleResult();
-
+        User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
 
     @Override
     public List<User> getAllUsers() {
-        List<User> users = entityManager.createQuery("SELECT p FROM User p").getResultList();
-        return users;
+        return entityManager.createQuery("SELECT p FROM User p").getResultList();
     }
 }
