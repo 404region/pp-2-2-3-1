@@ -1,6 +1,5 @@
 package web.dao;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -10,8 +9,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
-@Transactional
 public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
